@@ -1,0 +1,619 @@
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 1   
+
+
+C51 COMPILER V9.55, COMPILATION OF MODULE HEADER
+OBJECT MODULE PLACED IN header.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\c51.exe header.h DB OE BR INCDIR(C:\SiLabs\MCU\Inc) OR SB CD LC NOAREGS LARGE
+
+line level    source
+
+   1          #ifndef __C8051F020__
+   2          #define __C8051F020__
+   3          
+   4          
+   5          #include "C8051F020.h"
+   1      =1  /*---------------------------------------------------------------------------
+   2      =1  ;
+   3      =1  ;
+   4      =1  ;
+   5      =1  ;
+   6      =1  ;       FILE NAME       : C8051F020_V1.h
+   7      =1  ;       TARGET MCUs     : C8051F020, 'F021, 'F022, 'F023
+   8      =1  ;       DESCRIPTION     : Register/bit definitions for the C8051F02x product family.
+   9      =1  ;
+  10      =1  ;       REVISION 1.1
+  11      =1  ;
+  12      =1  ;---------------------------------------------------------------------------*/
+  13      =1  
+  14      =1  #ifndef C8051F020_DEFS_H
+  15      =1  #define C8051F020_DEFS_H
+  16      =1  
+  17      =1  /*  BYTE Registers  */
+  18      =1  sfr P0       =  0x80;   /* PORT 0                                                  */
+  19      =1  sfr SP       =  0x81;   /* STACK POINTER                                           */
+  20      =1  sfr DPL      =  0x82;   /* DATA POINTER - LOW BYTE                                 */
+  21      =1  sfr DPH      =  0x83;   /* DATA POINTER - HIGH BYTE                                */
+  22      =1  sfr P4       =  0x84;   /* PORT 4                                                                                                                                 */
+  23      =1  sfr P5       =  0x85;   /* PORT 5                                                  */
+  24      =1  sfr P6       =  0x86;   /* PORT 6                                                                                                                                 */
+  25      =1  sfr PCON     =  0x87;   /* POWER CONTROL                                           */
+  26      =1  sfr TCON     =  0x88;   /* TIMER CONTROL                                           */
+  27      =1  sfr TMOD     =  0x89;   /* TIMER MODE                                              */
+  28      =1  sfr TL0      =  0x8A;   /* TIMER 0 - LOW BYTE                                      */
+  29      =1  sfr TL1      =  0x8B;   /* TIMER 1 - LOW BYTE                                      */
+  30      =1  sfr TH0      =  0x8C;   /* TIMER 0 - HIGH BYTE                                     */
+  31      =1  sfr TH1      =  0x8D;   /* TIMER 1 - HIGH BYTE                                     */
+  32      =1  sfr CKCON    =  0x8E;   /* CLOCK CONTROL                                           */
+  33      =1  sfr PSCTL    =  0x8F;   /* PROGRAM STORE R/W CONTROL                               */
+  34      =1  sfr P1       =  0x90;   /* PORT 1                                                  */
+  35      =1  sfr TMR3CN   =  0x91;   /* TIMER 3 CONTROL                                         */
+  36      =1  sfr TMR3RLL  =  0x92;   /* TIMER 3 RELOAD REGISTER - LOW BYTE                      */
+  37      =1  sfr TMR3RLH  =  0x93;   /* TIMER 3 RELOAD REGISTER - HIGH BYTE                     */
+  38      =1  sfr TMR3L    =  0x94;   /* TIMER 3 - LOW BYTE                                      */
+  39      =1  sfr TMR3H    =  0x95;   /* TIMER 3 - HIGH BYTE                                     */
+  40      =1  sfr P7           =  0x96;   /* PORT 7                                                  */
+  41      =1  sfr SCON0    =  0x98;   /* SERIAL PORT 0 CONTROL                                   */
+  42      =1  sfr SBUF0    =  0x99;   /* SERIAL PORT 0 BUFFER                                    */
+  43      =1  sfr SPI0CFG  =  0x9A;   /* SERIAL PERIPHERAL INTERFACE 0 CONFIGURATION             */
+  44      =1  sfr SPI0DAT  =  0x9B;   /* SERIAL PERIPHERAL INTERFACE 0 DATA                      */
+  45      =1  sfr ADC1     =  0x9C;   /* ADC 1 DATA                                              */
+  46      =1  sfr SPI0CKR  =  0x9D;   /* SERIAL PERIPHERAL INTERFACE 0 CLOCK RATE CONTROL        */
+  47      =1  sfr CPT0CN   =  0x9E;   /* COMPARATOR 0 CONTROL                                    */
+  48      =1  sfr CPT1CN   =  0x9F;   /* COMPARATOR 1 CONTROL                                    */
+  49      =1  sfr P2       =  0xA0;   /* PORT 2                                                  */
+  50      =1  sfr EMI0TC   =  0xA1;   /* EMIF TIMING CONTROL                                     */
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 2   
+
+  51      =1  sfr EMI0CF   =  0xA3;   /* EXTERNAL MEMORY INTERFACE (EMIF) CONFIGURATION          */
+  52      =1  sfr P0MDOUT  =  0xA4;   /* PORT 0 OUTPUT MODE CONFIGURATION                        */
+  53      =1  sfr P1MDOUT  =  0xA5;   /* PORT 1 OUTPUT MODE CONFIGURATION                        */
+  54      =1  sfr P2MDOUT  =  0xA6;   /* PORT 2 OUTPUT MODE CONFIGURATION                        */
+  55      =1  sfr P3MDOUT  =  0xA7;   /* PORT 3 OUTPUT MODE CONFIGURATION                        */
+  56      =1  sfr IE       =  0xA8;   /* INTERRUPT ENABLE                                        */
+  57      =1  sfr SADDR0   =  0xA9;   /* SERIAL PORT 0 SLAVE ADDRESS                             */
+  58      =1  sfr ADC1CN   =  0xAA;   /* ADC 1 CONTROL                                           */
+  59      =1  sfr ADC1CF   =  0xAB;   /* ADC 1 ANALOG MUX CONFIGURATION                          */
+  60      =1  sfr AMX1SL   =  0xAC;   /* ADC 1 ANALOG MUX CHANNEL SELECT                         */
+  61      =1  sfr P3IF     =  0xAD;   /* PORT 3 EXTERNAL INTERRUPT FLAGS                         */
+  62      =1  sfr SADEN1   =  0xAE;   /* SERIAL PORT 1 SLAVE ADDRESS MASK                        */
+  63      =1  sfr EMI0CN   =  0xAF;   /* EXTERNAL MEMORY INTERFACE CONTROL                       */
+  64      =1  sfr P3       =  0xB0;   /* PORT 3                                                  */
+  65      =1  sfr OSCXCN   =  0xB1;   /* EXTERNAL OSCILLATOR CONTROL                             */
+  66      =1  sfr OSCICN   =  0xB2;   /* INTERNAL OSCILLATOR CONTROL                             */
+  67      =1  sfr P74OUT   =  0xB5;   /* PORTS 4 - 7 OUTPUT MODE                                 */
+  68      =1  sfr FLSCL    =  0xB6;   /* FLASH MEMORY TIMING PRESCALER                           */
+  69      =1  sfr FLACL    =  0xB7;   /* FLASH ACESS LIMIT                                       */
+  70      =1  sfr IP       =  0xB8;   /* INTERRUPT PRIORITY                                      */
+  71      =1  sfr SADEN0   =  0xB9;   /* SERIAL PORT 0 SLAVE ADDRESS MASK                        */
+  72      =1  sfr AMX0CF   =  0xBA;   /* ADC 0 MUX CONFIGURATION                                 */
+  73      =1  sfr AMX0SL   =  0xBB;   /* ADC 0 MUX CHANNEL SELECTION                             */
+  74      =1  sfr ADC0CF   =  0xBC;   /* ADC 0 CONFIGURATION                                     */
+  75      =1  sfr P1MDIN   =  0xBD;   /* PORT 1 INPUT MODE                                       */
+  76      =1  sfr ADC0L    =  0xBE;   /* ADC 0 DATA - LOW BYTE                                   */
+  77      =1  sfr ADC0H    =  0xBF;   /* ADC 0 DATA - HIGH BYTE                                  */
+  78      =1  sfr SMB0CN   =  0xC0;   /* SMBUS 0 CONTROL                                         */
+  79      =1  sfr SMB0STA  =  0xC1;   /* SMBUS 0 STATUS                                          */
+  80      =1  sfr SMB0DAT  =  0xC2;   /* SMBUS 0 DATA                                            */
+  81      =1  sfr SMB0ADR  =  0xC3;   /* SMBUS 0 SLAVE ADDRESS                                   */
+  82      =1  sfr ADC0GTL  =  0xC4;   /* ADC 0 GREATER-THAN REGISTER - LOW BYTE                  */
+  83      =1  sfr ADC0GTH  =  0xC5;   /* ADC 0 GREATER-THAN REGISTER - HIGH BYTE                 */
+  84      =1  sfr ADC0LTL  =  0xC6;   /* ADC 0 LESS-THAN REGISTER - LOW BYTE                     */
+  85      =1  sfr ADC0LTH  =  0xC7;   /* ADC 0 LESS-THAN REGISTER - HIGH BYTE                    */
+  86      =1  sfr T2CON    =  0xC8;   /* TIMER 2 CONTROL                                         */
+  87      =1  sfr T4CON    =  0xC9;   /* TIMER 4 CONTROL                                         */
+  88      =1  sfr RCAP2L   =  0xCA;   /* TIMER 2 CAPTURE REGISTER - LOW BYTE                     */
+  89      =1  sfr RCAP2H   =  0xCB;   /* TIMER 2 CAPTURE REGISTER - HIGH BYTE                    */
+  90      =1  sfr TL2      =  0xCC;   /* TIMER 2 - LOW BYTE                                      */
+  91      =1  sfr TH2      =  0xCD;   /* TIMER 2 - HIGH BYTE                                     */
+  92      =1  sfr SMB0CR   =  0xCF;   /* SMBUS 0 CLOCK RATE                                      */
+  93      =1  sfr PSW      =  0xD0;   /* PROGRAM STATUS WORD                                     */
+  94      =1  sfr REF0CN   =  0xD1;   /* VOLTAGE REFERENCE 0 CONTROL                             */
+  95      =1  sfr DAC0L    =  0xD2;   /* DAC 0 REGISTER - LOW BYTE                               */
+  96      =1  sfr DAC0H    =  0xD3;   /* DAC 0 REGISTER - HIGH BYTE                              */
+  97      =1  sfr DAC0CN   =  0xD4;   /* DAC 0 CONTROL                                           */
+  98      =1  sfr DAC1L    =  0xD5;   /* DAC 1 REGISTER - LOW BYTE                               */
+  99      =1  sfr DAC1H    =  0xD6;   /* DAC 1 REGISTER - HIGH BYTE                              */
+ 100      =1  sfr DAC1CN   =  0xD7;   /* DAC 1 CONTROL                                           */
+ 101      =1  sfr PCA0CN   =  0xD8;   /* PCA 0 COUNTER CONTROL                                   */
+ 102      =1  sfr PCA0MD   =  0xD9;   /* PCA 0 COUNTER MODE                                      */
+ 103      =1  sfr PCA0CPM0 =  0xDA;   /* CONTROL REGISTER FOR PCA 0 MODULE 0                     */
+ 104      =1  sfr PCA0CPM1 =  0xDB;   /* CONTROL REGISTER FOR PCA 0 MODULE 1                     */
+ 105      =1  sfr PCA0CPM2 =  0xDC;   /* CONTROL REGISTER FOR PCA 0 MODULE 2                     */
+ 106      =1  sfr PCA0CPM3 =  0xDD;   /* CONTROL REGISTER FOR PCA 0 MODULE 3                     */
+ 107      =1  sfr PCA0CPM4 =  0xDE;   /* CONTROL REGISTER FOR PCA 0 MODULE 4                     */
+ 108      =1  sfr ACC      =  0xE0;   /* ACCUMULATOR                                             */
+ 109      =1  sfr XBR0     =  0xE1;   /* DIGITAL CROSSBAR CONFIGURATION REGISTER 0               */
+ 110      =1  sfr XBR1     =  0xE2;   /* DIGITAL CROSSBAR CONFIGURATION REGISTER 1               */
+ 111      =1  sfr XBR2     =  0xE3;   /* DIGITAL CROSSBAR CONFIGURATION REGISTER 2               */
+ 112      =1  sfr RCAP4L   =  0xE4;   /* TIMER 4 CAPTURE REGISTER - LOW BYTE                     */
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 3   
+
+ 113      =1  sfr RCAP4H   =  0xE5;   /* TIMER 4 CAPTURE REGISTER - HIGH BYTE                    */
+ 114      =1  sfr EIE1     =  0xE6;   /* EXTERNAL INTERRUPT ENABLE 1                             */
+ 115      =1  sfr EIE2     =  0xE7;   /* EXTERNAL INTERRUPT ENABLE 2                             */
+ 116      =1  sfr ADC0CN   =  0xE8;   /* ADC 0 CONTROL                                           */
+ 117      =1  sfr PCA0L    =  0xE9;   /* PCA 0 TIMER - LOW BYTE                                  */
+ 118      =1  sfr PCA0CPL0 =   0xEA;   /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 0 - LOW BYTE  */
+ 119      =1  sfr PCA0CPL1 =   0xEB;   /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 1 - LOW BYTE  */
+ 120      =1  sfr PCA0CPL2 =   0xEC;   /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 2 - LOW BYTE  */
+ 121      =1  sfr PCA0CPL3 =   0xED;   /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 3 - LOW BYTE  */
+ 122      =1  sfr PCA0CPL4 =   0xEE;   /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 4 - LOW BYTE  */
+ 123      =1  sfr RSTSRC   =   0xEF;   /* RESET SOURCE                                            */
+ 124      =1  sfr B        =   0xF0;   /* B REGISTER                                              */
+ 125      =1  sfr SCON1    =  0xF1;   /* SERIAL PORT 1 CONTROL                                   */
+ 126      =1  sfr SBUF1    =  0xF2;   /* SERAIL PORT 1 DATA                                      */
+ 127      =1  sfr SADDR1   =  0xF3;   /* SERAIL PORT 1                                           */
+ 128      =1  sfr TL4      =  0xF4;   /* TIMER 4 DATA - LOW BYTE                                 */
+ 129      =1  sfr TH4      =  0xF5;   /* TIMER 4 DATA - HIGH BYTE                                */
+ 130      =1  sfr EIP1     =   0xF6;   /* EXTERNAL INTERRUPT PRIORITY REGISTER 1                  */
+ 131      =1  sfr EIP2     =   0xF7;   /* EXTERNAL INTERRUPT PRIORITY REGISTER 2                  */
+ 132      =1  sfr SPI0CN   =   0xF8;   /* SERIAL PERIPHERAL INTERFACE 0 CONTROL                   */
+ 133      =1  sfr PCA0H    =   0xF9;          /* PCA 0 TIMER - HIGH BYTE                                 */
+ 134      =1  sfr PCA0CPH0 =   0xFA;          /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 0 - HIGH BYTE */
+ 135      =1  sfr PCA0CPH1 =   0xFB;          /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 1 - HIGH BYTE */
+ 136      =1  sfr PCA0CPH2 =   0xFC;          /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 2 - HIGH BYTE */
+ 137      =1  sfr PCA0CPH3 =   0xFD;          /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 3 - HIGH BYTE */
+ 138      =1  sfr PCA0CPH4 =   0xFE;          /* CAPTURE/COMPARE REGISTER FOR PCA 0 MODULE 4 - HIGH BYTE */
+ 139      =1  sfr WDTCN    =   0xFF;          /* WATCHDOG TIMER CONTROL                                  */
+ 140      =1  
+ 141      =1  
+ 142      =1  /*  BIT Registers  */
+ 143      =1  
+ 144      =1  /*  TCON  0x88 */
+ 145      =1  sbit TF1   = TCON ^ 7;              /* TIMER 1 OVERFLOW FLAG      */
+ 146      =1  sbit TR1   = TCON ^ 6;              /* TIMER 1 ON/OFF CONTROL     */
+ 147      =1  sbit TF0   = TCON ^ 5;              /* TIMER 0 OVERFLOW FLAG      */
+ 148      =1  sbit TR0   = TCON ^ 4;              /* TIMER 0 ON/OFF CONTROL     */
+ 149      =1  sbit IE1   = TCON ^ 3;              /* EXT. INTERRUPT 1 EDGE FLAG */
+ 150      =1  sbit IT1   = TCON ^ 2;              /* EXT. INTERRUPT 1 TYPE      */
+ 151      =1  sbit IE0   = TCON ^ 1;              /* EXT. INTERRUPT 0 EDGE FLAG */
+ 152      =1  sbit IT0   = TCON ^ 0;              /* EXT. INTERRUPT 0 TYPE      */
+ 153      =1  
+ 154      =1  /*  SCON0  0x98 */
+ 155      =1  sbit SM00  = SCON0 ^ 7;             /* SERIAL MODE CONTROL BIT 0           */
+ 156      =1  sbit SM10  = SCON0 ^ 6;             /* SERIAL MODE CONTROL BIT 1           */
+ 157      =1  sbit SM20  = SCON0 ^ 5;             /* MULTIPROCESSOR COMMUNICATION ENABLE */
+ 158      =1  sbit REN0  = SCON0 ^ 4;             /* RECEIVE ENABLE                      */
+ 159      =1  sbit TB80  = SCON0 ^ 3;             /* TRANSMIT BIT 8                      */
+ 160      =1  sbit RB80  = SCON0 ^ 2;             /* RECEIVE BIT 8                       */
+ 161      =1  sbit TI0   = SCON0 ^ 1;             /* TRANSMIT INTERRUPT FLAG             */
+ 162      =1  sbit RI0   = SCON0 ^ 0;             /* RECEIVE INTERRUPT FLAG              */
+ 163      =1  
+ 164      =1  /*  IE  0xA8 */
+ 165      =1  sbit EA    = IE ^ 7;                /* GLOBAL INTERRUPT ENABLE      */
+ 166      =1  sbit ET2   = IE ^ 5;                /* TIMER 2 INTERRUPT ENABLE     */
+ 167      =1  sbit ES0   = IE ^ 4;                /* UART0 INTERRUPT ENABLE       */
+ 168      =1  sbit ET1   = IE ^ 3;                /* TIMER 1 INTERRUPT ENABLE     */
+ 169      =1  sbit EX1   = IE ^ 2;                /* EXTERNAL INTERRUPT 1 ENABLE  */
+ 170      =1  sbit ET0   = IE ^ 1;                /* TIMER 0 INTERRUPT ENABLE     */
+ 171      =1  sbit EX0   = IE ^ 0;                /* EXTERNAL INTERRUPT 0 ENABLE  */
+ 172      =1  
+ 173      =1  /*  IP  0xB8 */
+ 174      =1  sbit PT2   = IP ^ 5;                /* TIMER 2 PRIORITY                                 */
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 4   
+
+ 175      =1  sbit PS0   = IP ^ 4;                /* SERIAL PORT PRIORITY                             */
+ 176      =1  sbit PT1   = IP ^ 3;                /* TIMER 1 PRIORITY                                 */
+ 177      =1  sbit PX1   = IP ^ 2;                /* EXTERNAL INTERRUPT 1 PRIORITY    */
+ 178      =1  sbit PT0   = IP ^ 1;                /* TIMER 0 PRIORITY                                 */
+ 179      =1  sbit PX0   = IP ^ 0;                /* EXTERNAL INTERRUPT 0 PRIORITY    */
+ 180      =1  
+ 181      =1  /* SMB0CN 0xC0 */
+ 182      =1  sbit BUSY     =   SMB0CN ^ 7;       /* SMBUS 0 BUSY                    */
+ 183      =1  sbit ENSMB    =   SMB0CN ^ 6;       /* SMBUS 0 ENABLE                  */
+ 184      =1  sbit STA      =   SMB0CN ^ 5;       /* SMBUS 0 START FLAG              */
+ 185      =1  sbit STO      =   SMB0CN ^ 4;       /* SMBUS 0 STOP FLAG               */
+ 186      =1  sbit SI       =   SMB0CN ^ 3;       /* SMBUS 0 INTERRUPT PENDING FLAG  */
+ 187      =1  sbit AA       =   SMB0CN ^ 2;       /* SMBUS 0 ASSERT/ACKNOWLEDGE FLAG */
+ 188      =1  sbit SMBFTE   =   SMB0CN ^ 1;       /* SMBUS 0 FREE TIMER ENABLE       */
+ 189      =1  sbit SMBTOE   =   SMB0CN ^ 0;       /* SMBUS 0 TIMEOUT ENABLE          */
+ 190      =1  
+ 191      =1  /*  T2CON  0xC8 */
+ 192      =1  sbit TF2   = T2CON ^ 7;             /* TIMER 2 OVERFLOW FLAG        */
+ 193      =1  sbit EXF2  = T2CON ^ 6;             /* EXTERNAL FLAG                */
+ 194      =1  sbit RCLK0 = T2CON ^ 5;             /* UART0 RX CLOCK SOURCE        */
+ 195      =1  sbit TCLK0 = T2CON ^ 4;             /* UART0 TX CLOCK SOURCE        */
+ 196      =1  sbit EXEN2 = T2CON ^ 3;             /* TIMER 2 EXTERNAL ENABLE FLAG */
+ 197      =1  sbit TR2   = T2CON ^ 2;             /* TIMER 2 ON/OFF CONTROL       */
+ 198      =1  sbit CT2   = T2CON ^ 1;             /* TIMER OR COUNTER SELECT      */
+ 199      =1  sbit CPRL2 = T2CON ^ 0;             /* CAPTURE OR RELOAD SELECT     */
+ 200      =1  
+ 201      =1  /*  PSW  */
+ 202      =1  sbit CY    = PSW ^ 7;               /* CARRY FLAG              */
+ 203      =1  sbit AC    = PSW ^ 6;               /* AUXILIARY CARRY FLAG    */
+ 204      =1  sbit F0    = PSW ^ 5;               /* USER FLAG 0             */
+ 205      =1  sbit RS1   = PSW ^ 4;               /* REGISTER BANK SELECT 1  */
+ 206      =1  sbit RS0   = PSW ^ 3;               /* REGISTER BANK SELECT 0  */
+ 207      =1  sbit OV    = PSW ^ 2;               /* OVERFLOW FLAG           */
+ 208      =1  sbit F1    = PSW ^ 1;               /* USER FLAG 1             */
+ 209      =1  sbit P     = PSW ^ 0;               /* ACCUMULATOR PARITY FLAG */
+ 210      =1  
+ 211      =1  /* PCA0CN D8H */
+ 212      =1  sbit CF    =   PCA0CN ^ 7;          /* PCA 0 COUNTER OVERFLOW FLAG   */
+ 213      =1  sbit CR    =   PCA0CN ^ 6;          /* PCA 0 COUNTER RUN CONTROL BIT */
+ 214      =1  sbit CCF4  =   PCA0CN ^ 4;          /* PCA 0 MODULE 4 INTERRUPT FLAG */
+ 215      =1  sbit CCF3  =   PCA0CN ^ 3;          /* PCA 0 MODULE 3 INTERRUPT FLAG */
+ 216      =1  sbit CCF2  =   PCA0CN ^ 2;          /* PCA 0 MODULE 2 INTERRUPT FLAG */
+ 217      =1  sbit CCF1  =   PCA0CN ^ 1;          /* PCA 0 MODULE 1 INTERRUPT FLAG */
+ 218      =1  sbit CCF0  =   PCA0CN ^ 0;          /* PCA 0 MODULE 0 INTERRUPT FLAG */
+ 219      =1  
+ 220      =1  /* ADC0CN E8H */
+ 221      =1  sbit AD0EN     =   ADC0CN ^ 7;      /* ADC 0 ENABLE                              */
+ 222      =1  sbit AD0TM     =   ADC0CN ^ 6;      /* ADC 0 TRACK MODE                          */
+ 223      =1  sbit AD0INT    =   ADC0CN ^ 5;      /* ADC 0 CONVERISION COMPLETE INTERRUPT FLAG */
+ 224      =1  sbit AD0BUSY   =   ADC0CN ^ 4;      /* ADC 0 BUSY FLAG                           */
+ 225      =1  sbit AD0CM1    =   ADC0CN ^ 3;      /* ADC 0 START OF CONVERSION MODE BIT 1      */
+ 226      =1  sbit AD0CM0    =   ADC0CN ^ 2;      /* ADC 0 START OF CONVERSION MODE BIT 0      */
+ 227      =1  sbit AD0WINT   =   ADC0CN ^ 1;      /* ADC 0 WINDOW COMPARE INTERRUPT FLAG       */
+ 228      =1  sbit AD0LJST   =   ADC0CN ^ 0;      /* ADC 0 RIGHT JUSTIFY DATA BIT              */
+ 229      =1  
+ 230      =1  /* SPI0CN F8H */
+ 231      =1  sbit SPIF     =   SPI0CN ^ 7;       /* SPI 0 INTERRUPT FLAG                     */
+ 232      =1  sbit WCOL     =   SPI0CN ^ 6;       /* SPI 0 WRITE COLLISION FLAG       */
+ 233      =1  sbit MODF     =   SPI0CN ^ 5;       /* SPI 0 MODE FAULT FLAG            */
+ 234      =1  sbit RXOVRN   =   SPI0CN ^ 4;       /* SPI 0 RX OVERRUN FLAG            */
+ 235      =1  sbit TXBSY    =   SPI0CN ^ 3;       /* SPI 0 TX BUSY FLAG                       */
+ 236      =1  sbit SLVSEL   =   SPI0CN ^ 2;       /* SPI 0 SLAVE SELECT                       */
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 5   
+
+ 237      =1  sbit MSTEN    =   SPI0CN ^ 1;       /* SPI 0 MASTER ENABLE                      */
+ 238      =1  sbit SPIEN    =   SPI0CN ^ 0;       /* SPI 0 SPI ENABLE                         */
+ 239      =1  
+ 240      =1  
+ 241      =1  sfr16 ADC0     = 0xbe;                 // ADC0 data
+ 242      =1  sfr16 TMR2     = 0xcc;                 // Timer2
+ 243      =1  sfr16 TMR4     = 0xf4;                 // Timer4 TL4,TH4
+ 244      =1  sfr16 RCAP4    = 0xe4;                 // Timer4 capture/reload
+ 245      =1  
+ 246      =1  // sfr16 DPTR           =0x82
+ 247      =1  
+ 248      =1  sfr16 DP       = 0x82;                    // data pointer
+ 249      =1  sfr16 TMR3RL   = 0x92;                    // Timer3 reload value
+ 250      =1  sfr16 TMR3     = 0x94;                    // Timer3 counter
+ 251      =1  sfr16 ADC0GT   = 0xc4;                    // ADC0 greater than window
+ 252      =1  sfr16 ADC0LT   = 0xc6;                    // ADC0 less than window
+ 253      =1  sfr16 RCAP2    = 0xca;                    // Timer2 capture/reload
+ 254      =1  
+ 255      =1  sfr16 DAC0     = 0xd2;                    // DAC0 data
+ 256      =1  sfr16 DAC1     = 0xd5;                    // DAC1 data
+ 257      =1  
+ 258      =1  
+ 259      =1  
+ 260      =1  #endif
+   6          
+   7          
+   8          
+   9          #define NULL                    0               
+  10          #define SYSCLK                  22118400L       //22.1184Mhz
+  11          #define SARCLK                  2500000L        //2.5Mhz  
+  12          // #define T4CLK                        10000L          //hz T=100us
+  13          #define T4CLK                   22118L          //1000[hz]
+  14          #define BAUDRATE                115200L                 //uart   clock frequency [bps]
+  15          #define INTERRUPT_TIMER4        16      //interrupt index
+  16          #define INTERRUPT_TIMER2        5       //interrupt index
+  17          #define INTERRUPT_TIMER1        3       //interrupt index
+  18          
+  19          #define FALSE   0 
+  20          #define TRUE    1
+  21          
+  22          //GPRIO SETUP::::::::::::::::::::::::::::::::::::
+  23          // #define MAX_DOUT_PINS        16              //digital output
+  24          // #define MAX_DIN_PINS 24              //digital output
+  25          #define MAX_DIGITAL_PINS        48              //digital output
+  26          
+  27          #define DIG_PORT_0      P4      //[00..07]MOLEX_P70/P72 Digital OUT
+  28          #define DIG_PORT_1      P5      //[08..15]MOLEX_P71/P73 Digital OUT
+  29          #define DIG_PORT_2      P3      //[16..23]DIP SWITCH Digital IN
+  30          #define DIG_PORT_3      P2      //[24..31]MOLEX_P69 Digital IN
+  31          #define DIG_PORT_4      P6      //[32..39]MOLEX_P63 Digital IN
+  32          #define DIG_PORT_5      P7      //[40..47]MOLEX_P68 Digital IN
+  33          #define DIG_PORT_x      P0      //[??..??]MOLEX_P68 Digital IN
+  34          
+  35          #define ADDRESS_PORT    P3
+  36          
+  37          
+  38          
+  39          sbit    UART_READ_DISABLE               =       P0^2;                           //read enable(active low) max3086 only for GPRIO
+  40          sbit    UART_WRITE_ENABLE               =       P0^3;                           //write enable(active high) max3086 only for GPRIO
+  41          // sbit DHT22_LINE                              =       P0^3;                           //write enable(active high) max3086 only for GPRIO
+  42          
+  43          
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 6   
+
+  44          
+  45          #define BYTELOW(v)   (*(((unsigned char *) (&v) + 1)))
+  46          #define BYTEHIGH(v)  (*((unsigned char *) (&v)))
+  47          
+  48          
+  49          
+  50          //GPRIO SETUP::::::::::::::::::::::::::::::::::::
+  51          
+  52          //old configurations
+  53          // #define PORT_IN_P69                          P2      [0..7]  
+  54          // P3 definition see DEBBUG section
+  55          // #define PORT_IN_DIP_SWITCH           P3
+  56          // #define PORT_OUT_P70                         P4                                      
+  57          // #define PORT_OUT_P71                         P5                              
+  58          // #define PORT_IN_P63                          P6      [8..15]                 
+  59          // #define PORT_IN_P68                          P7      [16..23]                //rotation switches port        
+  60          
+  61          //C8051F020KIT SETUP::::::::::::::::::::::::::::
+  62          /*
+  63          #define MAX_DOUT_PINS   16      //digital output
+  64          #define MAX_DIN_PINS    24      //digital output
+  65          #define DIN_PORT_0      P2      //MOLEX_P69
+  66          #define DIN_PORT_1      P3      //DIP SWITCH
+  67          #define DIN_PORT_2      P6      //MOLEX_P63
+  68          #define DIN_PORT_3      P7      //MOLEX_P68
+  69          #define DOUT_PORT_0     P4      //MOLEX_P70/P72
+  70          #define DOUT_PORT_1     P5      //MOLEX_P71/P73
+  71          #define DOUT_PORT_2     P5
+  72          #define DOUT_PORT_3     P5
+  73          #define ADDRESS_PORT    P3
+  74          sbit    UART_READ_DISABLE               =       P0^2;   //read max3086 enable(active low)
+  75          sbit    UART_WRITE_ENABLE               =       P0^3;   //write max3086 enable(active high)
+  76          */
+  77          //C8051F020KIT SETUP::::::::::::::::::::::::::::
+  78          
+  79          
+  80          
+  81          // rx string  "<aa,bb,cc,dd,ee,ff,..>"
+  82          #define RX_BUFFER_SIZE  24
+  83          #define TX_BUFFER_SIZE  24
+  84          #define RX_START_FRAME  '<'             //pc(tx)->mcu(rx)
+  85          #define RX_STOP_FRAME   0x0A            //'\n'
+  86          // #define RX_STOP_FRAME        '>'             //pc(tx)->mcu(rx)
+  87          #define TX_START_FRAME  '{'             //pc(rx)<-mcu(tx)
+  88          #define TX_STOP_FRAME   0x0A            //'\n'
+  89          // #define TX_STOP_FRAME        '}'             //pc(rx)<-mcu(tx)
+  90          
+  91          /*var128 is a variables array of 128 bytes which is a buffer for scratch pad memory area*/
+  92          #define VAR128_VADDR    1               
+  93          
+  94          
+  95          //P0 uart and other io
+  96          //P1 ADC1(x8)+ADC0(x8)+DAC(x2)  //16 ain , 2 aout
+  97          //P2 GPIO in                                    //24 din
+  98          //P3 GPIO in
+  99          //P4 GPIO in
+ 100          //P5 GPIO out                                   //24 dout
+ 101          //P6 GPIO out
+ 102          //P7 GPIO out
+ 103          // #define LOWBYTE(v)   ((unsigned char) (v))
+ 104          // #define HIGHBYTE(v)  ((unsigned char) (((unsigned int) (v)) >> 8))
+ 105          /*void test (void)  {
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 7   
+
+ 106                  // unsigned int  x;
+ 107                  // unsigned char cl, ch;
+ 108                  // cl = LOWBYTE(x);
+ 109                  // ch = HIGHBYTE(x);
+ 110          }*/
+ 111          
+ 112          
+ 113          
+ 114          /*void test1 (void)  {
+ 115            BYTELOW(x) = BYTEHIGH(x);
+ 116            BYTEHIGH (x) = 5;
+ 117          }*/
+ 118          
+ 119          typedef unsigned char   u8;
+ 120          typedef signed   char   s8;
+ 121          typedef unsigned int    u16;
+ 122          typedef signed   int    s16;
+ 123          typedef unsigned long   u32;
+ 124          typedef signed   long   s32;
+ 125          
+ 126          
+ 127          typedef struct bufType{
+ 128                  u8 idx;
+ 129                  u8 size;
+ 130                  u8 sum;
+ 131                  u8 buf[32];
+ 132                  
+ 133          }bufType;
+ 134          typedef struct msgType{
+ 135                  u8 xor;
+ 136                  u8 size;
+ 137                  u8 addr;
+ 138                  u8 type;
+ 139                  u8 idx;
+ 140                  u8 val;
+ 141                  u8 t1;
+ 142                  u8 t2;
+ 143          }msgType;
+ 144          typedef struct timeType{
+ 145                  u16 us;
+ 146                  u16 ms;
+ 147                  u16 sec;
+ 148          }timeType;
+ 149          typedef struct timerType{
+ 150                  u16 ms;
+ 151                  u16     sec;
+ 152          }timerType;
+ 153          
+ 154          
+ 155          
+ 156          
+ 157          // typedef struct stageType{
+ 158                  // u8 mode;     //function
+ 159                  // u8 out;              //pointer for output (using u8 index)
+ 160                  // u8 in;               //pointer for input (using u8 index)
+ 161                  // u8 num;              //u8 variable
+ 162                  // u8 sec;              //time parameter in seconds
+ 163          // }stageType;
+ 164          // typedef struct procType{     
+ 165                  // stageType stages[STAGES];
+ 166                  //// u8 title;
+ 167                  // u8                   idx_stage;      //pointing the next stage to execute
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 8   
+
+ 168                  // u8                   idx_size;       //actual number of stages
+ 169                  // u8                   mode;
+ 170                  // timerType    timer;
+ 171                  // u8                   run;
+ 172                  
+ 173          // }procType;
+ 174          
+ 175          
+ 176          
+ 177          /*##########################################################################*/
+ 178          //variables:
+ 179          
+ 180          
+ 181          
+ 182          // sbit RE              =       P0^2;                           //read max3086 enable(active low)
+ 183          // sbit DE              =       P0^3;                           //write max3086 enable(active high)
+ 184          
+ 185          // static u8 VIRTUAL_ADDRESS;
+ 186          static bufType rx;
+ 187          static msgType rxmsg;
+ 188          static bufType tx;
+ 189          static msgType txmsg;           
+ 190          static timeType time;           
+ 191          
+ 192          
+ 193          static u16 dout_timeout_sec[MAX_DIGITAL_PINS];
+ 194          static u16 dout_timeout_ms[MAX_DIGITAL_PINS];
+ 195          static u8 var128[128];
+ 196          static bit flag_1sec;   //stores array of 40-bits 
+ 197          // static u8 dht22[40]; //stores array of 40-bits 
+ 198          
+ 199          
+ 200          
+ 201          /*##########################################################################*/
+ 202          // function prototypes:
+ 203          
+ 204          void Tx_init    ();
+ 205          void Tx_set             (u8 i,u8 var);
+ 206          void Rx_init    ();
+ 207          void Loopback   ();
+ 208          void SendConstMsg(u16 *pmsg);
+ 209          
+ 210          void Rxmsg_dout_wr      (/*rxmsg*/);
+ 211          u16 Conv_u8_to_str      (u8 val);
+ 212          u8      Conv_str_to_u8  (u16 str2);
+ 213          u8      Conv_ascii_to_int               (u8 ch);
+ 214          u8      Conv_int_to_ascii(u8 prm);      //low 4bit hex integer converted to string char, prm=[0x0..0xF]
+ 215          u8      Rx_get_u8       (u8 i)  ;
+ 216          
+ 217          bit     get_din (u8 idx);
+ 218          u16     get_ain (u8 ch);
+ 219          void    set_aout(u8 ch, u16 val);
+ 220          void    set_dout(u8 idx,u8 val);
+ 221          void    set_dout_mode(u8 ch, u8 mode);
+ 222          
+ 223          void    ADC0_set_input_pair     (u8 ch,u8 val);
+ 224          
+ 225          // FLASH read/write/erase routines
+ 226          void FLASH_ByteWrite (u16 addr, u8 byte, bit SFLE);
+ 227          u8       FLASH_ByteRead (u16 addr, bit SFLE);
+ 228          void FLASH_PageErase (u16 addr, bit SFLE);
+ 229          void FLASH_Save();
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 9   
+
+ 230          void FLASH_Load();
+ 231          
+ 232          
+ 233          #endif
+ 234          
+ 235          
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 10  
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 11  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P0 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0080H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+SCON0. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+SMB0CN . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C0H  1
+T2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+PCA0CN . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D8H  1
+ADC0CN . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E8H  1
+SPI0CN . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F8H  1
+u8 . . . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_CHAR   -----  1
+s8 . . . . . . . . . . . . . . . . . .  TYPEDEF  -----  CHAR     -----  1
+u16. . . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_INT    -----  2
+s16. . . . . . . . . . . . . . . . . .  TYPEDEF  -----  INT      -----  2
+u32. . . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_LONG   -----  4
+s32. . . . . . . . . . . . . . . . . .  TYPEDEF  -----  LONG     -----  4
+bufType. . . . . . . . . . . . . . . .  * TAG *  -----  STRUCT   -----  35
+  idx. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0000H  1
+  size . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0001H  1
+  sum. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0002H  1
+  buf. . . . . . . . . . . . . . . . .  MEMBER   -----  ARRAY    0003H  32
+bufType. . . . . . . . . . . . . . . .  TYPEDEF  -----  STRUCT   -----  35
+  idx. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0000H  1
+  size . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0001H  1
+  sum. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0002H  1
+  buf. . . . . . . . . . . . . . . . .  MEMBER   -----  ARRAY    0003H  32
+msgType. . . . . . . . . . . . . . . .  * TAG *  -----  STRUCT   -----  8
+  xor. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0000H  1
+  size . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0001H  1
+  addr . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0002H  1
+  type . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0003H  1
+  idx. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0004H  1
+  val. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0005H  1
+  t1 . . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0006H  1
+  t2 . . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0007H  1
+msgType. . . . . . . . . . . . . . . .  TYPEDEF  -----  STRUCT   -----  8
+  xor. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0000H  1
+  size . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0001H  1
+  addr . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0002H  1
+  type . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0003H  1
+  idx. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0004H  1
+  val. . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0005H  1
+  t1 . . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0006H  1
+  t2 . . . . . . . . . . . . . . . . .  MEMBER   -----  U_CHAR   0007H  1
+timeType . . . . . . . . . . . . . . .  * TAG *  -----  STRUCT   -----  6
+  us . . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0000H  2
+  ms . . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0002H  2
+  sec. . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0004H  2
+timeType . . . . . . . . . . . . . . .  TYPEDEF  -----  STRUCT   -----  6
+  us . . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0000H  2
+  ms . . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0002H  2
+  sec. . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0004H  2
+timerType. . . . . . . . . . . . . . .  * TAG *  -----  STRUCT   -----  4
+  ms . . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0000H  2
+  sec. . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0002H  2
+timerType. . . . . . . . . . . . . . .  TYPEDEF  -----  STRUCT   -----  4
+C51 COMPILER V9.55   HEADER                                                                09/04/2017 13:39:51 PAGE 12  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+  ms . . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0000H  2
+  sec. . . . . . . . . . . . . . . . .  MEMBER   -----  U_INT    0002H  2
+rx . . . . . . . . . . . . . . . . . .  STATIC   XDATA  STRUCT   0000H  35
+rxmsg. . . . . . . . . . . . . . . . .  STATIC   XDATA  STRUCT   0023H  8
+tx . . . . . . . . . . . . . . . . . .  STATIC   XDATA  STRUCT   002BH  35
+txmsg. . . . . . . . . . . . . . . . .  STATIC   XDATA  STRUCT   004EH  8
+time . . . . . . . . . . . . . . . . .  STATIC   XDATA  STRUCT   0056H  6
+dout_timeout_sec . . . . . . . . . . .  STATIC   XDATA  ARRAY    005CH  96
+dout_timeout_ms. . . . . . . . . . . .  STATIC   XDATA  ARRAY    00BCH  96
+var128 . . . . . . . . . . . . . . . .  STATIC   XDATA  ARRAY    011CH  128
+flag_1sec. . . . . . . . . . . . . . .  STATIC   DATA   BIT      0000H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    412    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

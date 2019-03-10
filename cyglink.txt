@@ -1,0 +1,1 @@
+"C:\Users\Alex19\Dropbox\PROJECTS\other\SunIO\C8051F020\Silabs Project\project.obj"  TO "C:\Users\Alex19\Dropbox\PROJECTS\other\SunIO\C8051F020\Silabs Project\project" RS(256) PL(68) PW(78) 

@@ -1,0 +1,411 @@
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 1   
+
+
+C51 COMPILER V9.55, COMPILATION OF MODULE FUNCTIONS
+OBJECT MODULE PLACED IN functions.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\c51.exe functions.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc) OR SB CD LC NOAREGS LARGE
+
+line level    source
+
+   1          // #include "header.h"
+   2          
+   3          
+   4          /*##########################################################################*/// functions:
+   5          
+   6          void SendConstMsg(u16 *pmsg){   //send err_msg_x
+*** ERROR C141 IN LINE 6 OF functions.c: syntax error near '*', expected ')'
+   7   1              // long code * idata powtab;      /* ptr in idata to code long */
+   8   1              u8 code * pmsg2=pmsg;                   //por to u8 in xdata
+*** ERROR C202 IN LINE 8 OF functions.c: 'u8': undefined identifier
+*** ERROR C141 IN LINE 8 OF functions.c: syntax error near 'code'
+   9   1              // u8 code * xdata pmsg2=pmsg;                  //por to u8 in xdata
+  10   1      
+  11   1              Tx_init();      //resets tx_buffer[] and tx_idx
+  12   1              if(pmsg2!=NULL){//copy from char[] in code 
+  13   2                      while((pmsg2[tx.idx]!=0)&&(tx.idx<TX_BUFFER_SIZE-1)){
+  14   3                              tx.buf[tx.idx+1]=pmsg2[tx.idx];
+  15   3                              tx.idx++;
+  16   3                      }               
+  17   2                      tx.buf[++tx.idx]=TX_STOP_FRAME;
+  18   2                      tx.buf[0]=TX_START_FRAME;
+  19   2                      tx.size=tx.idx;
+  20   2                      tx.idx=0;       //transmition will use tx.idx )in TI0 case
+  21   2                      TI0=1;          //start transmition
+  22   2              }
+  23   1      }//SendConstMsg()
+  24          
+  25          void func101(){ //build str with time data to tx.buf
+  26   1              Tx_init();      //resets tx_buffer[] and tx_idx 
+  27   1              while((rx.buf[tx.idx]!=RX_STOP_FRAME)&&(tx.idx<TX_BUFFER_SIZE)){
+  28   2                      tx.buf[tx.idx]=rx.buf[tx.idx];
+  29   2                      tx.idx++;
+  30   2              }//while()      
+  31   1              tx.buf[tx.idx]=TX_STOP_FRAME;
+  32   1              tx.buf[0]=TX_START_FRAME;
+  33   1              tx.size=tx.idx+1;
+  34   1              tx.idx=0;       //transmition will use tx.idx )in TI0 case
+  35   1              TI0=1;          //start transmition
+  36   1      
+  37   1      }//func101()
+  38          
+  39          void Loopback(){//loop back input or send msg
+  40   1              Tx_init();      //resets tx_buffer[] and tx_idx 
+  41   1              while((rx.buf[tx.idx]!=RX_STOP_FRAME)&&(tx.idx<TX_BUFFER_SIZE)){
+  42   2                      tx.buf[tx.idx]=rx.buf[tx.idx];
+  43   2                      tx.idx++;
+  44   2              }//while()      
+  45   1              tx.buf[tx.idx]=TX_STOP_FRAME;
+  46   1              tx.buf[0]=TX_START_FRAME;
+  47   1              tx.size=tx.idx+1;
+  48   1              tx.idx=0;       //transmition will use tx.idx )in TI0 case
+  49   1              TI0=1;          //start transmition
+  50   1      
+  51   1      }//Loopback
+  52                  
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 2   
+
+  53          void Rxmsg_dout_wr(/*rxmsg*/){
+  54   1      
+  55   1              if(rxmsg.idx<MAX_DOUT_PINS){            
+  56   2                      dout_timeout_sec[rxmsg.idx]=((u16)rxmsg.t1)<<8;
+  57   2                      dout_timeout_sec[rxmsg.idx]+=rxmsg.t2;  
+  58   2                      Dout_Wr_1(rxmsg.idx,rxmsg.val); 
+  59   2              }
+  60   1      }//Rxmsg_dout_wr()
+  61                  
+  62          u8      Rx_get_u8(u8 i){                                //returns "FF" ascii value from tx_buffer start at index
+  63                  
+  64                  return (Conv_ascii_to_int(rx.buf[i])<<4)+(Conv_ascii_to_int(rx.buf[i+1]));
+  65          }
+  66          
+  67          void Tx_set(u8 i,u8 var){               //set tx.buf after converting u8 to "xx" str
+  68                  u16 prm=Conv_u8_to_str(var);    
+  69                  tx.buf[i]=BYTEHIGH(prm);
+  70                  tx.buf[i+1]=BYTELOW(prm);
+  71          }
+  72          
+  73          u8      Conv_ascii_to_int(u8 ch){       //converts ascii['0',..'9','A',..'F'] to int[0..15], returns 0xff if failed
+  74                  
+  75                  if(ch>='0' && ch<='9'){
+  76                          return ch-'0';
+  77                  }else if(ch>='A' && ch<='F'){
+  78                          return (ch-'A'+10);             
+  79                  }else
+  80                          return 0xff;
+  81          }
+  82          
+  83          u8      Conv_int_to_ascii(u8 prm){      //low 4bit hex integer converted to string char, prm=[0x0..0xF]
+  84                  if(prm<10){     //prm=[0,1,2,..9]
+  85                          prm+='0';
+  86                  }else{                  //prm=[0xA,0xB,0xC,..0xF]
+  87                          prm+=('A'-10);
+  88                  }
+  89                  return prm;
+  90          }
+  91          
+  92          u8      Conv_str_to_u8(u16 str2){       //inputs 2 ascii bytes outputs u8 integer (number2string)
+  93                  
+  94                  u16 str=str2;
+  95                  u8 ret=0;
+  96                  u8 prm1=BYTEHIGH(str);  //read 1st ascii
+  97                  u8 prm2=BYTELOW(str);   //read 2nd ascii
+  98                  
+  99                  prm1=Conv_ascii_to_int(prm1);
+ 100                  prm2=Conv_ascii_to_int(prm2);
+ 101                  
+ 102                  ret=prm1<<4+prm2;
+ 103                  return ret;
+ 104          }
+ 105          
+ 106          u16 Conv_u8_to_str(u8 val){             //input u8 value output 2 ascii bytes (number2string)
+ 107                  u8 prm1=val&0x0f;
+ 108                  u8 prm2=(val&0xf0)>>4;
+ 109                  u16 ret=0x0;
+ 110                  
+ 111                  // if(prm1<10){ //prm=[0,1,2,..9]
+ 112                          // prm1+='0';
+ 113                  // }else{                       //prm=[0xA,0xB,0xC,..0xF]
+ 114                          // prm1+=('A'-10);
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 3   
+
+ 115                  // }
+ 116                  prm1=Conv_int_to_ascii(prm1);
+ 117                  prm2=Conv_int_to_ascii(prm2);
+ 118                  
+ 119                  // if(prm2>10){ //prm=[0xA,0xB,0xC,..0xF]
+ 120                          // prm2+=('A'-10);
+ 121                  // }else{                       //prm=[0,1,2,..9]
+ 122                          // prm2+='0';
+ 123                  // }
+ 124          
+ 125                  BYTEHIGH(ret) = prm2;
+ 126                  BYTELOW(ret) = prm1;
+ 127                  
+ 128                  return ret;
+ 129          }
+ 130          
+ 131          void Rx_init(void){
+ 132                  
+ 133                  for(rx.idx=0;rx.idx<RX_BUFFER_SIZE;rx.idx++){
+ 134                          rx.buf[rx.idx]=0;
+ 135                  }
+ 136                  rx.idx=0;
+ 137          }
+ 138          
+ 139          void Tx_init(void){
+ 140                  
+ 141                  for(tx.idx=0;tx.idx<RX_BUFFER_SIZE;tx.idx++){
+ 142                          tx.buf[tx.idx]=0;
+ 143                  }
+ 144                  tx.idx=0;
+ 145          }
+ 146          
+ 147          void Buf_init(u16 *ptr){
+ 148                  
+ 149                  bufType xdata  *bufp=ptr; //point to bufType in xdata
+ 150                  
+ 151                  for(bufp->idx=0;bufp->idx<RX_BUFFER_SIZE;bufp->idx++){
+ 152                          bufp->buf[bufp->idx]=0;
+ 153                  }
+ 154                  bufp->idx=0;
+ 155          }
+ 156          
+ 157          void ADC0_set_input_pair(u8 ch,u8 val){/*single ended: val=0, differential: val=1 */
+ 158                  u8 cnt;
+ 159                  
+ 160                  if((ch>=0)&&(ch<=7)){
+ 161                          switch(ch){
+ 162                                  case 0:
+ 163                                  case 1:
+ 164                                          if(!val){AMX0CF&=~0x01;}        //Bit0=0: AIN0, AIN1 are independent single-ended inputs
+ 165                                          else{AMX0CF|=0x01;}             //Bit0=1: AIN0, AIN1 are (respectively) +, - differential input pair
+ 166                                  break;
+ 167                                  case 2:
+ 168                                  case 3:
+ 169                                          if(!val){AMX0CF&=~0x02;}        //Bit1=0: AIN2, AIN3 are independent single-ended inputs
+ 170                                          else{AMX0CF|=0x02;}             //Bit1=1: AIN2, AIN3 are (respectively) +, - differential input pair
+ 171                                  break;
+ 172                                  case 4:
+ 173                                  case 5:                 
+ 174                                          if(!val){AMX0CF&=~0x04;}        //Bit2=0: AIN4, AIN5 are independent single-ended inputs
+ 175                                          else{AMX0CF|=0x04;}             //Bit2=1: AIN4, AIN5 are (respectively) +, - differential input pair                            
+ 176                                  break;
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 4   
+
+ 177                                  case 6:
+ 178                                  case 7:
+ 179                                          if(!val){AMX0CF&=~0x08;}        //Bit3=0: AIN6, AIN7 are independent single-ended inputs
+ 180                                          else{AMX0CF|=0x08;}             //Bit3=1: AIN6, AIN7 are (respectively) +, - differential input pair                            
+ 181                                  break;
+ 182                          }//switch(ch)   
+ 183                  }//if((ch>=0)&&(cn<=7)){
+ 184          
+ 185                  //set_dout(x,1) //test delay
+ 186                  for(cnt=5;cnt;cnt--){}  //minimum settling time delay of 1[ns]
+ 187                  //set_dout(x,0) //test delay
+ 188          }
+ 189          
+ 190          void Dout_Wr_1(u8 idx,u8 val){//dout[0..23] - P5,P6,P7 
+ 191                  
+ 192                  u8 bitmask;
+ 193          
+ 194                  if(idx>=0 && idx<=7){           //P5
+ 195                          bitmask=0x01<<idx;              
+ 196                          if(val){                                                //rxmsg.val!=0
+ 197                                  P5 &= ~bitmask;                 //set GPIO to ON, use bitmask when register is not bit addressable 
+ 198                          }
+ 199                          else{                                                   //rxmsg.val=0
+ 200                                  P5 |=bitmask;                   //set GPIO to OFF
+ 201                          }       
+ 202                  }
+ 203                  else if(idx>=8 && idx<=15){     //P6
+ 204                          
+ 205                          bitmask=0x01<<(idx-8);          
+ 206                          if(val){                                                //rxmsg.val!=0
+ 207                                  P6 &= ~bitmask;                 //set bit to push
+ 208                          }
+ 209                          else{                                                   //rxmsg.val=0
+ 210                                  P6 |= bitmask;                  //set GPIO to OFF
+ 211                          }       
+ 212                  }
+ 213                  else if(idx>=16 && idx<=23){//P7
+ 214                          
+ 215                          bitmask=0x01<<(idx-16);         
+ 216                          if(val){                                                //rxmsg.val!=0
+ 217                                  P7 &= ~bitmask;                 //set GPIO to ON, use bitmask when register is not bit addressable 
+ 218                          }
+ 219                          else{                                                   //rxmsg.val=0
+ 220                                  P7 |= bitmask;                  //set GPIO to OFF
+ 221                          }       
+ 222                  }
+ 223          }//Dout_Wr_1()
+ 224          
+ 225          bit Din_Rd_1(u8 idx){//din[0..23] - P2,P3,P4
+ 226                  
+ 227                  u8 bitmask;
+ 228          
+ 229                  if(idx>=0 && idx<=7){           //P2
+ 230                          bitmask=0x01<<idx;              
+ 231                          P2=0x0; //discharge 
+ 232                          P2=0xff;//return to open-drain
+ 233                          if(P2&bitmask){
+ 234                                  return 1;
+ 235                          }
+ 236                          return 0;
+ 237                  }
+ 238                  else if(idx>=8 && idx<=15){             //P3
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 5   
+
+ 239                          bitmask=0x01<<(idx-8);          
+ 240                          P3=0x0; //discharge 
+ 241                          P3=0xff;//return to open-drain
+ 242                          if(P3&bitmask){
+ 243                                  return 1;
+ 244                          }
+ 245                          return 0;
+ 246                  }
+ 247                  else if(idx>=16 && idx<=23){            //P4
+ 248                          bitmask=0x01<<(idx-16);         
+ 249                          P4=0x0; //discharge 
+ 250                          P4=0xff;//return to open-drain
+ 251                          if(P4&bitmask){
+ 252                                  return 1;
+ 253                          }
+ 254                          return 0;
+ 255                  }
+ 256                  else{
+ 257                          return 0;
+ 258                  }
+ 259          }//Din_Rd_1()
+ 260          
+ 261          
+ 262          void Wr_aout(u8 ch, u16 val){
+ 263                  
+ 264                  u8 low  =BYTELOW(val);
+ 265                  u8 high =0x0F&BYTEHIGH(val);
+ 266                  
+ 267                  switch(ch){
+ 268                          case 0: {//DAC0
+ 269                                  DAC0L=low;
+ 270                                  DAC0H=high;                     
+ 271                          }break;
+ 272                          case 1: {//DAC1
+ 273                                  DAC1L=low;
+ 274                                  DAC1H=high;                                                     
+ 275                          }break; 
+ 276                  }
+ 277                  
+ 278          }
+ 279          
+ 280          u16 Rd_ain(u8 ch){      
+ 281                  u16 adc0=0L;
+ 282                  u8 low=0;
+ 283                  u8 high=0;
+ 284                  
+ 285                  if((ch>=0)&&(ch<=8)){//configure analog input pair as single-ended or differential 
+ 286          
+ 287                          AD0EN=1;        //enable adc0   
+ 288                          AMX0SL=ch;
+ 289                          AMX0SL=ch;
+ 290                          AD0INT=0;
+ 291                          AD0INT=0;
+ 292                          AD0BUSY=1;
+ 293                          while(!AD0INT){};
+ 294                          AD0INT=0;
+ 295                          
+ 296                          adc0=ADC0;
+ 297                          
+ 298                          // Wr_aout(0,adc0);
+ 299                          
+ 300                          
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 6   
+
+ 301                          low=((unsigned char) (((unsigned int) (adc0)) >> 8));
+ 302                          high=((unsigned char) (adc0));          
+ 303                          
+ 304                          // low=BYTELOW(adc0);
+ 305                          // high=BYTEHIGH(adc0);
+ 306                          
+ 307                          // BYTEHIGH(adc0)=      ((unsigned char) (((unsigned int) (ADC0)) >> 8));
+ 308                          // BYTELOW(adc0)        =       ((unsigned char) (ADC0));
+ 309                          
+ 310                          AD0EN=0;        //disable adc0
+ 311                  }//if((ch<=0)&&(cn<=7))
+ 312                  return adc0;    
+ 313          }
+ 314          
+ 315          
+ 316          
+ 317          /*void machine1(void){
+ 318                  enum    next_state {NEXT, STAY, RESET, JUMP};
+ 319                  enum    next_state      ns;
+ 320                                  u8      i;      //proc idx
+ 321                                  u8      j;      //stage idx     
+ 322                                  u8      stage_mode      ;       
+ 323                                  u8      stage_run       ;               
+ 324                  static  u8 first_run    =0;
+ 325                  
+ 326                  for(i=0;i<MAX_PROCS;i++){       
+ 327                          ns=STAY;        //set default
+ 328                          j=procs[i].idx_stage;
+ 329                          if(procs[i].run&&j<=STAGES){    //pre stage engine
+ 330                                  switch(procs[i].stages[j].mode){
+ 331                                          case STAGE_MODE_DELAY_SET_SEC:{ 
+ 332                                                  procs[idx_proc].timer.sec=1001;
+ 333                                                  ns=NEXT;
+ 334                                          }break;
+ 335                                          case STAGE_MODE_DELAY_SET_MS:{  
+ 336                                                  procs[idx_proc].timer.ms=1001;
+ 337                                                  ns=NEXT;
+ 338                                          }break;
+ 339                                          case STAGE_MODE_DELAY_WAIT:{    //delay sec
+ 340                                                  if((!procs[idx_proc].timer.sec)&&(!procs[idx_proc].timer.ms)){
+ 341                                                          ns=NEXT;
+ 342                                                  }
+ 343                                                  ns=STAY;
+ 344                                          }break;
+ 345                                          case STAGE_MODE_WR_OUT:{        //write out
+ 346                                          }break;
+ 347                                          case STAGE_MODE_RD_IN:{         //read in
+ 348                                          }break;
+ 349                                          case STAGE_MODE_TEST_IN:{       //test in
+ 350                                          }break;
+ 351                                          case STAGE_MODE_TEST_CLK:{      //test clock
+ 352                                          }break;
+ 353                                          case STAGE_MODE_JUMP:{          //jump
+ 354                                                  procs[idx_proc].idx_stage=procs[idx_proc].stages[idx_stage].num;
+ 355                                                  ns=JUMP;
+ 356                                          }break;                         
+ 357                                  }//switch
+ 358                          }//if(procs[i].run&&j<=STAGES)
+ 359                          
+ 360                          switch(ns){
+ 361                                  case NEXT:{
+ 362                                          proc[i].idx_stage++;
+C51 COMPILER V9.55   FUNCTIONS                                                             11/13/2016 22:36:02 PAGE 7   
+
+ 363                                  }break;
+ 364                                  case STAY:{
+ 365                                          
+ 366                                  }break;
+ 367                                  case RESET:{
+ 368                                          proc[i].idx_stage=0;
+ 369                                  }break;
+ 370                                  case JUMP:{
+ 371                                          proc[i].idx_stage=proc[i].stages[j].num;        //set idx of next stage
+ 372                                  }break;
+ 373          
+ 374                          }//switch(ns)
+ 375                  }//fro(procs[i])
+ 376          }//machine1()
+ 377          */
+ 378          
+ 379          
+ 380          
+ 381          
+ 382          
+ 383          
+ 384          
+ 385          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
